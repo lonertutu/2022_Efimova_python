@@ -13,7 +13,7 @@ dr.circle(screen, (1, 0, 10), (180,180), 7)
 dr.circle(screen, (1, 0, 10), (220,180), 7)
 dr.line(screen, (1, 0, 10), (165,165), (190,175), 5)
 dr.line(screen, (1, 0, 10),  (210,175), (235,165), 5)
-dr.line(screen, (1, 0, 10), (160,230), (240,231), 15)
+dr.line(screen, (1, 0, 10), (160,230), (240,230), 15)
 
 #can copy paste
 pygame.display.update()
