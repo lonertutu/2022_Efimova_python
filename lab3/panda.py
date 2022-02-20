@@ -4,7 +4,7 @@ import pygame.draw as dr
 pygame.init()
 
 FPS = 30
-screen = pygame.display.set_mode((600, 600))
+screen = pygame.display.set_mode((900, 700))
 
 CORAL = (245, 155, 141)
 BAMBOO = (54, 117, 50)
@@ -14,7 +14,7 @@ BLACK = (0, 0, 0)
 GREY = (42, 31, 47)
 BEIGE = (250, 235, 215)
 
-dr.rect(screen, CORAL, (0, 0, 600, 600)) #wallpaper
+dr.rect(screen, CORAL, (0, 0, 900, 700)) #wallpaper
 
 dr.line(screen, BAMBOO, (280,350),(280,250), 10) #first bamboo
 dr.line(screen, BAMBOO, (280,170),(300, 100), 10)
@@ -41,14 +41,14 @@ dr.ellipse(screen,BLACK, [185, 460, 65, 45])
 
 dr.ellipse(screen, WHITE, (250, 280, 150, 160))
 
-dr.polygon(screen, BLACK, [[350,280], [365,290], [360,420], [295,400]]) #frontleftleg
+dr.polygon(screen, BLACK, [[300,270], [365,290], [360,420], [295,400]]) #frontleftleg
 dr.polygon(screen, BLACK, [[295,400], [362,409], [340,500], [280,480]])
 dr.polygon(screen, BLACK, [[290,440], [340,500], [310,530], [250,520]])
 dr.ellipse(screen, BLACK, [250, 510, 65,30])
 dr.ellipse(screen, BLACK, [245, 480, 70, 60])
 
 #rightear
-dr.rect(screen, BLACK, (210, 215, 23 , 45), border_top_right_radius = 25, border_bottom_left_radius = 40, border_bottom_right_radius = 40, border_top_left_radius = 80)
+dr.rect(screen, BLACK, (215, 215, 23 , 45), border_top_right_radius = 25, border_bottom_left_radius = 40, border_bottom_right_radius = 40, border_top_left_radius = 80)
 
 dr.ellipse(screen, REALWHITE, (205, 245, 120, 100)) #head
 #dr.polygon(screen, REALWHITE, [[205,270], [240, 365], [280, 365], [300,270]])
@@ -65,6 +65,29 @@ dr.rect(screen, BLACK, (200, 345, 25 , 15), border_top_right_radius = 5, border_
 #leftear
 dr.rect(screen, GREY, (270, 230, 25 , 35), border_top_right_radius = 20, border_bottom_left_radius = 25, border_bottom_right_radius = 25, border_top_left_radius = 30)
 dr.rect(screen, BLACK, (260, 225, 25 , 45), border_top_right_radius = 5, border_bottom_left_radius = 10, border_bottom_right_radius = 20, border_top_left_radius = 20)
+
+#tree
+dr.rect(screen, BAMBOO, (465, 0, 55, 570))
+
+#----second panda----#
+dr.ellipse(screen, REALWHITE, (475, 400, 220, 150)) #body
+dr.polygon(screen, REALWHITE, [[495, 350], [625,300], [690,450], [475, 480]])
+dr.polygon(screen, REALWHITE, [[530,260], [590, 270], [625,300], [495, 350]])
+dr.ellipse(screen, WHITE, (530, 200, 130, 130))
+
+dr.ellipse(screen, BLACK, (485, 320, 110, 110)) #frontrightleg
+dr.ellipse(screen, BLACK, (555, 385, 80, 60))
+dr.polygon(screen, BLACK, [[525, 425], [580,340], [630,400], [585, 445]])
+dr.polygon(screen, BLACK, [[600,365], [660,345], [670,395], [610, 440]])
+dr.ellipse(screen, BLACK, (630, 345, 50, 60))
+
+dr.ellipse(screen, BLACK, (505, 480, 100, 80)) #backrightleg
+dr.polygon(screen, BLACK, [[565, 480], [660,510], [660,550], [545, 560]])
+dr.ellipse(screen, BLACK, (610, 500, 60, 60))
+dr.polygon(screen, BLACK, [[650, 510], [680,510], [670,555], [645, 560]])
+
+dr.polygon(screen, BLACK, [[635, 320], [705,480], [650,480], [615, 320]]) #frontleftleg
+dr.ellipse(screen, BLACK, (640, 450, 65, 60))
 
 
 pygame.display.update()
