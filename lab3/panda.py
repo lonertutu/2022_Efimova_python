@@ -8,7 +8,7 @@ screen = pygame.display.set_mode((600, 600))
 
 CORAL = (245, 155, 141)
 BAMBOO = (54, 117, 50)
-WHITE = (255, 238, 250)
+WHITE = (255, 238, 249)
 REALWHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 GREY = (42, 31, 47)
