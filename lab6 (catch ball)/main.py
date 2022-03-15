@@ -19,8 +19,9 @@ GREEN = (0, 255, 0)
 MAGENTA = (255, 0, 255)
 CYAN = (0, 255, 255)
 BLACK = (0, 0, 0)
+WHITE = (255, 255, 255)
 COLORS = [RED, BLUE, YELLOW, GREEN, MAGENTA, CYAN]
-empty_ball = [0, 0, 0, "BLACK", 0, 0, 0]
+empty_ball = [0, 0, 0, "BLACK", 0, 0]
 Balls = []
 Planets = []
 
@@ -36,32 +37,30 @@ def new_ball():
 
 
 def new_symbol():
-    #pygame.image.load("saturn.png")
-    #background_image = pygame.image.load("saturn.png").convert_alpha()
     x1 = randint(100, 500)
     y1 = randint(100, 500)
+    r1 = 7
     speedx1 = randint(-3, 3)
     speedy1 = randint(-3, 3)
-    #screen.blit(background_image, [x1, y1])
-    return [x1, y1, speedx1, speedy1]
+    return [x1, y1, r1, speedx1, speedy1]
 
 
 def click(event, ball):
     return ((event.pos[1] - ball[1]) ** 2 + (event.pos[0] - ball[0]) ** 2) < ball[2] ** 2
 
-def click_planet(event, planet):
-    return ((event.pos[1] - 15) ** 2 + (event.pos[0] - 15) ** 2) < 15 * 2
+def click_planet(event):
+    return ((event.pos[1]) ** 2 + (event.pos[0]) ** 2) < 15 * 2
 
 def draw_balls():
     for i in Balls:
         pygame.draw.circle(screen, i[3], (i[0], i[1]), i[2], 0)
 
-def draw_planets(x1, y1):
+def draw_planets():
     for i in Planets:
+        pygame.draw.circle(screen, i[3], (i[0], i[1]), i[2], 0)
         pygame.image.load("saturn.png")
         background_image = pygame.image.load("saturn.png").convert_alpha()
-        screen.blit(background_image, [x1, y1])
-        pygame.draw.circle(screen, i[3], (i[0], i[1]), i[2], 0)
+        screen.blit(background_image, (i[0]-15, i[1]-15))
 
 def speed_effect():
     for i in Balls:
@@ -71,9 +70,7 @@ def speed_effect():
 def speed_effect_planets():
     for i in Planets:
         i[0] = i[0] + i[4]
-        i[1] = i[1] + i[5]
-
-
+        #i[1] = i[1] + i[5]
 
 def collision_detection():
     for i in Balls:
@@ -121,22 +118,43 @@ while not finished:
                     score += 10
                     print("Your score is", score)
                     Balls[i] = empty_ball
-
-        elif event.type == pygame.MOUSEBUTTONDOWN:
             for i in range(len(Planets)):
                 if click(event, Planets[i]):
                     print("click")
                     score += 100
                     print("Your score is", score)
                     Planets[i] = empty_ball
+            #else:
+            #    if not click(event, Balls[i]) and not click(event, Planets[i]): //не получается сделать уменьшение очков при не попадании в мишени
+            #        print(" :( ")
+            #        score -= 10
+            #        print("Your score is", score)
+
+
 
     if randint(0, 100) > 95:
         a = new_ball()
         Balls.append(a)
     draw_balls()
+
+    if randint(0, 100) > 95:
+        a = new_symbol()
+        Planets.append(a)
+    draw_planets()
+
     pygame.display.update()
+
     speed_effect()
     collision_detection()
+
+    speed_effect_planets()
+    collision_detection_planets()
+
+    f1 = pygame.font.Font(None, 72)
+    text1 = f1.render('Hello Привет', 1, (180, 0, 0))
+
+    screen.blit(text1, (10, 50))
+
     screen.fill(BLACK)
 
 pygame.quit()
