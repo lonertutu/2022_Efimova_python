@@ -155,7 +155,7 @@ class Target:
         self.live = type
         self.type = type
 
-    def hit(self, point=1, points=0):
+    def hit(self, point=1, points=1):
         self.live -= 1
         points += point
         return points
