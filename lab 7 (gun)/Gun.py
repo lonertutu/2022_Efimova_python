@@ -169,11 +169,11 @@ class Target:
         self.live = type
         self.type = type
 
-    def hit(self, point=1, points=1):
+    def hit(self, p_point=1, player_points=1):
         """ Check if it was hitting """
         self.live -= 1
-        points += point
-        return points
+        player_points += p_point
+        return player_points
 
     def draw(self):
         """ Draw the target: ball or rectangle """
@@ -213,7 +213,7 @@ class Target:
 class Menu:
     """ Constructor class of menu """
 
-    def __init__(self, points = (400, 350)):
+    def __init__(self, points=(400, 350)):
         self.points = points
 
     def render(self, cover, font, num_point):
@@ -257,8 +257,8 @@ class Menu:
                         done = False
                     elif point == 1:
                         exit()
-            window.blit(info, (0, 0))
-            window.blit(screen, (0, 30))
+            screen.blit(info, (0, 0))
+            screen.blit(screen, (0, 30))
             pygame.display.flip()
 
 
@@ -282,7 +282,7 @@ def drawscore():
     """ Shows the players points """
     f1 = pygame.font.Font(None, 36)
     tbl = 'Your points: '
-    tbl += str(points)
+    tbl += str(player_points)
     text1 = f1.render(tbl, True, BLACK)
     screen.blit(text1, (10, 10))
 
@@ -315,7 +315,6 @@ def start1():
 
 pygame.init()
 info = pygame.Surface((WIDTH_FOR_MENU1, HEIGHT_FOR_MENU1))
-window = pygame.display.set_mode((WIDTH_FOR_MENU1, HEIGHT))
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 points = [(360, 300, u'Play', DARK_BLUE, DARK_BLUE, 0),
           (360, 340, u'Exit', DARK_BLUE, DARK_BLUE, 1)]
@@ -325,7 +324,7 @@ game.menu()
 bullet = 0
 bulletshow = 0
 balls = []
-points = 0
+player_points = 0
 clock = pygame.time.Clock()
 gun = Gun(screen)
 target1 = Target(1)
@@ -363,7 +362,7 @@ while not finished:
     for b in balls:
         b.move()
         if b.hittest(target1):
-            points = target1.hit()
+            player_points = target1.hit()
             if target1.live == 0:
                 target1 = Target(1)
                 bulletshow = bullet
@@ -372,7 +371,7 @@ while not finished:
                 do_showtext = 100
 
         if b.hittest(target2):
-            points = target2.hit()
+            player_points = target2.hit()
             if target2.live == 0:
                 target2 = Target(2)
                 bulletshow = bullet
