@@ -169,7 +169,7 @@ class Target:
         self.live = type
         self.type = type
 
-    def hit(self, p_point=1, player_points=1):
+    def hit(self, p_point=1, player_points=0):
         """ Check if it was hitting """
         self.live -= 1
         player_points += p_point
@@ -278,7 +278,7 @@ def collision_situation(obj):
         obj.y = obj.r
 
 
-def drawscore():
+def drawscore(player_points):
     """ Shows the players points """
     f1 = pygame.font.Font(None, 36)
     tbl = 'Your points: '
@@ -294,6 +294,7 @@ def showtext():
     tbl += ' shots '
     text1 = f1.render(tbl, True, BLACK)
     screen.blit(text1, (180, 250))
+    return tbl
 
 
 def start():
@@ -311,6 +312,20 @@ def start1():
     target2.move()
     collision_situation(target1)
     collision_situation(target2)
+
+def space(bullet, balls):
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            sys.exit()
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            if not pause:
+                gun.fire2_start(event)
+        elif event.type == pygame.MOUSEBUTTONUP:
+            if not pause:
+                balls, bullet = gun.fire2_end(event, bullet, balls)
+        elif event.type == pygame.MOUSEMOTION:
+            gun.targetting(event)
+    return bullet, balls
 
 
 pygame.init()
@@ -338,7 +353,7 @@ while not finished:
     start()
     for b in balls:
         b.draw()
-    drawscore()
+    drawscore(player_points)
     pause = False
     if do_showtext > 0:
         showtext()
@@ -347,17 +362,7 @@ while not finished:
     pygame.display.update()
 
     clock.tick(FPS)
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            finished = True
-        elif event.type == pygame.MOUSEBUTTONDOWN:
-            if not pause:
-                gun.fire2_start(event)
-        elif event.type == pygame.MOUSEBUTTONUP:
-            if not pause:
-                balls, bullet = gun.fire2_end(event, bullet, balls)
-        elif event.type == pygame.MOUSEMOTION:
-            gun.targetting(event)
+    space(bullet, balls)
 
     for b in balls:
         b.move()
