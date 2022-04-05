@@ -313,6 +313,7 @@ def start1():
     collision_situation(target1)
     collision_situation(target2)
 
+
 def space(bullet, balls):
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
